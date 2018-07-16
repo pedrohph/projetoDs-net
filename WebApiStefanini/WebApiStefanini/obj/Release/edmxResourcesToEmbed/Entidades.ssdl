@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjetoStefaniniModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Endereco">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cep" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="Logradouro" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Bairro" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="Cidade" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Complemento" Type="varchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="Senha" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Genero" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Nascimento" Type="date" Nullable="false" />
+    <Property Name="Login_Id" Type="int" Nullable="false" />
+    <Property Name="Endereco_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Usuario__Enderec__47DBAE45">
+    <End Role="Endereco" Type="Self.Endereco" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Endereco">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Endereco_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario__Login_I__48CFD27E">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Login_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="DeleteEndereco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cep" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InsertEndereco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cep" Type="varchar" Mode="In" />
+    <Parameter Name="Logradouro" Type="varchar" Mode="In" />
+    <Parameter Name="Bairro" Type="varchar" Mode="In" />
+    <Parameter Name="Cidade" Type="varchar" Mode="In" />
+    <Parameter Name="UF" Type="varchar" Mode="In" />
+    <Parameter Name="Complemento" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InsertLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login" Type="varchar" Mode="In" />
+    <Parameter Name="senha" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InsertUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="nascimento" Type="date" Mode="In" />
+    <Parameter Name="genero" Type="varchar" Mode="In" />
+    <Parameter Name="endereco" Type="varchar" Mode="In" />
+    <Parameter Name="login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectEnderecoFromCep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cep" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectEnderecoFromCidade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cidade" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectEnderecoFromId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SelectEnderecos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SelectLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SelectLoginFromId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SelectLoginFromLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectLoginfromLoginAndSenha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+    <Parameter Name="Senha" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectUsuarioFromCep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cep" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectUsuarioFromLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectUsuarioFromNome" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nome" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateEndereco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CepAntigo" Type="varchar" Mode="In" />
+    <Parameter Name="Cep" Type="varchar" Mode="In" />
+    <Parameter Name="Logradouro" Type="varchar" Mode="In" />
+    <Parameter Name="Bairro" Type="varchar" Mode="In" />
+    <Parameter Name="Cidade" Type="varchar" Mode="In" />
+    <Parameter Name="UF" Type="varchar" Mode="In" />
+    <Parameter Name="Complemento" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginAntigo" Type="varchar" Mode="In" />
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+    <Parameter Name="Senha" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+    <Parameter Name="Nome" Type="varchar" Mode="In" />
+    <Parameter Name="Nascimento" Type="date" Mode="In" />
+    <Parameter Name="Genero" Type="varchar" Mode="In" />
+    <Parameter Name="Cep" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ProjetoStefaniniModelStoreContainer">
+    <EntitySet Name="Endereco" EntityType="Self.Endereco" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Usuario__Enderec__47DBAE45" Association="Self.FK__Usuario__Enderec__47DBAE45">
+      <End Role="Endereco" EntitySet="Endereco" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario__Login_I__48CFD27E" Association="Self.FK__Usuario__Login_I__48CFD27E">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

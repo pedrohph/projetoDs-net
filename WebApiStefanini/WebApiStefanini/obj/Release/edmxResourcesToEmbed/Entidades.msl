@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjetoStefaniniModelStoreContainer" CdmEntityContainer="ProjetoStefaniniEntities">
+    <EntitySetMapping Name="Endereco">
+      <EntityTypeMapping TypeName="ProjetoStefaniniModel.Endereco">
+        <MappingFragment StoreEntitySet="Endereco">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="ProjetoStefaniniModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login1" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="ProjetoStefaniniModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+          <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+          <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="DeleteEndereco" FunctionName="ProjetoStefaniniModel.Store.DeleteEndereco" />
+    <FunctionImportMapping FunctionImportName="DeleteLogin" FunctionName="ProjetoStefaniniModel.Store.DeleteLogin" />
+    <FunctionImportMapping FunctionImportName="DeleteUsuario" FunctionName="ProjetoStefaniniModel.Store.DeleteUsuario" />
+    <FunctionImportMapping FunctionImportName="InsertEndereco" FunctionName="ProjetoStefaniniModel.Store.InsertEndereco" />
+    <FunctionImportMapping FunctionImportName="InsertLogin" FunctionName="ProjetoStefaniniModel.Store.InsertLogin" />
+    <FunctionImportMapping FunctionImportName="InsertUsuario" FunctionName="ProjetoStefaniniModel.Store.InsertUsuario" />
+    <FunctionImportMapping FunctionImportName="SelectEnderecoFromCep" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecoFromCep">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecoFromCep_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectEnderecoFromCidade" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecoFromCidade">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecoFromCidade_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectEnderecoFromId" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecoFromId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecoFromId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectEnderecos" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecos_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectLogin" FunctionName="ProjetoStefaniniModel.Store.SelectLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectLogin_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectLoginFromId" FunctionName="ProjetoStefaniniModel.Store.SelectLoginFromId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectLoginFromId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectLoginFromLogin" FunctionName="ProjetoStefaniniModel.Store.SelectLoginFromLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectLoginFromLogin_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectLoginfromLoginAndSenha" FunctionName="ProjetoStefaniniModel.Store.SelectLoginfromLoginAndSenha" />
+    <FunctionImportMapping FunctionImportName="SelectUsuarioFromCep" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarioFromCep">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarioFromCep_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+          <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+          <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectUsuarioFromLogin" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarioFromLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarioFromLogin_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+          <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+          <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectUsuarioFromNome" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarioFromNome">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarioFromNome_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+          <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+          <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectUsuarios" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarios_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+          <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+          <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateEndereco" FunctionName="ProjetoStefaniniModel.Store.UpdateEndereco" />
+    <FunctionImportMapping FunctionImportName="UpdateLogin" FunctionName="ProjetoStefaniniModel.Store.UpdateLogin" />
+    <FunctionImportMapping FunctionImportName="UpdateUsuario" FunctionName="ProjetoStefaniniModel.Store.UpdateUsuario" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjetoStefaniniModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cep" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Logradouro" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Bairro" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Cidade" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Complemento" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Genero" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Nascimento" Type="date" Nullable="false" />
+          <Property Name="Login_Id" Type="int" Nullable="false" />
+          <Property Name="Endereco_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Usuario__Enderec__47DBAE45">
+          <End Role="Endereco" Type="Self.Endereco" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endereco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Endereco_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Login_I__48CFD27E">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Login_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteEndereco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cep" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertEndereco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cep" Type="varchar" Mode="In" />
+          <Parameter Name="Logradouro" Type="varchar" Mode="In" />
+          <Parameter Name="Bairro" Type="varchar" Mode="In" />
+          <Parameter Name="Cidade" Type="varchar" Mode="In" />
+          <Parameter Name="UF" Type="varchar" Mode="In" />
+          <Parameter Name="Complemento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="varchar" Mode="In" />
+          <Parameter Name="senha" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nome" Type="varchar" Mode="In" />
+          <Parameter Name="nascimento" Type="date" Mode="In" />
+          <Parameter Name="genero" Type="varchar" Mode="In" />
+          <Parameter Name="endereco" Type="varchar" Mode="In" />
+          <Parameter Name="login" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectEnderecoFromCep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cep" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectEnderecoFromCidade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cidade" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectEnderecoFromId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectEnderecos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelectLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelectLoginFromId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectLoginFromLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectLoginfromLoginAndSenha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="varchar" Mode="In" />
+          <Parameter Name="Senha" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectUsuarioFromCep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cep" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectUsuarioFromLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectUsuarioFromNome" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nome" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateEndereco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CepAntigo" Type="varchar" Mode="In" />
+          <Parameter Name="Cep" Type="varchar" Mode="In" />
+          <Parameter Name="Logradouro" Type="varchar" Mode="In" />
+          <Parameter Name="Bairro" Type="varchar" Mode="In" />
+          <Parameter Name="Cidade" Type="varchar" Mode="In" />
+          <Parameter Name="UF" Type="varchar" Mode="In" />
+          <Parameter Name="Complemento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginAntigo" Type="varchar" Mode="In" />
+          <Parameter Name="Login" Type="varchar" Mode="In" />
+          <Parameter Name="Senha" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="varchar" Mode="In" />
+          <Parameter Name="Nome" Type="varchar" Mode="In" />
+          <Parameter Name="Nascimento" Type="date" Mode="In" />
+          <Parameter Name="Genero" Type="varchar" Mode="In" />
+          <Parameter Name="Cep" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProjetoStefaniniModelStoreContainer">
+          <EntitySet Name="Endereco" EntityType="Self.Endereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Usuario__Enderec__47DBAE45" Association="Self.FK__Usuario__Enderec__47DBAE45">
+            <End Role="Endereco" EntitySet="Endereco" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Login_I__48CFD27E" Association="Self.FK__Usuario__Login_I__48CFD27E">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjetoStefaniniModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cep" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logradouro" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bairro" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cidade" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Complemento" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Enderec__47DBAE45" FromRole="Endereco" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login1" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Login_I__48CFD27E" FromRole="Login" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Genero" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nascimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Login_Id" Type="Int32" Nullable="false" />
+          <Property Name="Endereco_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Endereco" Relationship="Self.FK__Usuario__Enderec__47DBAE45" FromRole="Usuario" ToRole="Endereco" />
+          <NavigationProperty Name="Login" Relationship="Self.FK__Usuario__Login_I__48CFD27E" FromRole="Usuario" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK__Usuario__Enderec__47DBAE45">
+          <End Role="Endereco" Type="Self.Endereco" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endereco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Endereco_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Login_I__48CFD27E">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Login_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjetoStefaniniEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Endereco" EntityType="Self.Endereco" />
+          <EntitySet Name="Login" EntityType="Self.Login" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Usuario__Enderec__47DBAE45" Association="Self.FK__Usuario__Enderec__47DBAE45">
+            <End Role="Endereco" EntitySet="Endereco" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Login_I__48CFD27E" Association="Self.FK__Usuario__Login_I__48CFD27E">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteEndereco">
+            <Parameter Name="Cep" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLogin">
+            <Parameter Name="Login" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUsuario">
+            <Parameter Name="login" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEndereco">
+            <Parameter Name="Cep" Mode="In" Type="String" />
+            <Parameter Name="Logradouro" Mode="In" Type="String" />
+            <Parameter Name="Bairro" Mode="In" Type="String" />
+            <Parameter Name="Cidade" Mode="In" Type="String" />
+            <Parameter Name="UF" Mode="In" Type="String" />
+            <Parameter Name="Complemento" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLogin">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="senha" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUsuario">
+            <Parameter Name="nome" Mode="In" Type="String" />
+            <Parameter Name="nascimento" Mode="In" Type="DateTime" />
+            <Parameter Name="genero" Mode="In" Type="String" />
+            <Parameter Name="endereco" Mode="In" Type="String" />
+            <Parameter Name="login" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectEnderecoFromCep" ReturnType="Collection(ProjetoStefaniniModel.SelectEnderecoFromCep_Result)">
+            <Parameter Name="Cep" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectEnderecoFromCidade" ReturnType="Collection(ProjetoStefaniniModel.SelectEnderecoFromCidade_Result)">
+            <Parameter Name="Cidade" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectEnderecoFromId" ReturnType="Collection(ProjetoStefaniniModel.SelectEnderecoFromId_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectEnderecos" ReturnType="Collection(ProjetoStefaniniModel.SelectEnderecos_Result)" />
+          <FunctionImport Name="SelectLogin" ReturnType="Collection(ProjetoStefaniniModel.SelectLogin_Result)" />
+          <FunctionImport Name="SelectLoginFromId" ReturnType="Collection(ProjetoStefaniniModel.SelectLoginFromId_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectLoginFromLogin" ReturnType="Collection(ProjetoStefaniniModel.SelectLoginFromLogin_Result)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectLoginfromLoginAndSenha" ReturnType="Collection(Int32)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Senha" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectUsuarioFromCep" ReturnType="Collection(ProjetoStefaniniModel.SelectUsuarioFromCep_Result)">
+            <Parameter Name="cep" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectUsuarioFromLogin" ReturnType="Collection(ProjetoStefaniniModel.SelectUsuarioFromLogin_Result)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectUsuarioFromNome" ReturnType="Collection(ProjetoStefaniniModel.SelectUsuarioFromNome_Result)">
+            <Parameter Name="Nome" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectUsuarios" ReturnType="Collection(ProjetoStefaniniModel.SelectUsuarios_Result)" />
+          <FunctionImport Name="UpdateEndereco">
+            <Parameter Name="CepAntigo" Mode="In" Type="String" />
+            <Parameter Name="Cep" Mode="In" Type="String" />
+            <Parameter Name="Logradouro" Mode="In" Type="String" />
+            <Parameter Name="Bairro" Mode="In" Type="String" />
+            <Parameter Name="Cidade" Mode="In" Type="String" />
+            <Parameter Name="UF" Mode="In" Type="String" />
+            <Parameter Name="Complemento" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLogin">
+            <Parameter Name="LoginAntigo" Mode="In" Type="String" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Senha" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUsuario">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Nome" Mode="In" Type="String" />
+            <Parameter Name="Nascimento" Mode="In" Type="DateTime" />
+            <Parameter Name="Genero" Mode="In" Type="String" />
+            <Parameter Name="Cep" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SelectEnderecoFromCep_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Cep" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Logradouro" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Bairro" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Cidade" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="UF" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Complemento" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="SelectEnderecoFromCidade_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Cep" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Logradouro" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Bairro" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Cidade" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="UF" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Complemento" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="SelectEnderecoFromId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Cep" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Logradouro" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Bairro" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Cidade" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="UF" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Complemento" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="SelectEnderecos_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Cep" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Logradouro" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Bairro" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Cidade" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="UF" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Complemento" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="SelectLogin_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Senha" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="SelectLoginFromId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Senha" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="SelectLoginFromLogin_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Senha" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="SelectUsuarioFromCep_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="16" />
+          <Property Type="DateTime" Name="Nascimento" Nullable="false" />
+          <Property Type="Int32" Name="Login_Id" Nullable="false" />
+          <Property Type="Int32" Name="Endereco_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SelectUsuarioFromLogin_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="16" />
+          <Property Type="DateTime" Name="Nascimento" Nullable="false" />
+          <Property Type="Int32" Name="Login_Id" Nullable="false" />
+          <Property Type="Int32" Name="Endereco_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SelectUsuarioFromNome_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="16" />
+          <Property Type="DateTime" Name="Nascimento" Nullable="false" />
+          <Property Type="Int32" Name="Login_Id" Nullable="false" />
+          <Property Type="Int32" Name="Endereco_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SelectUsuarios_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="16" />
+          <Property Type="DateTime" Name="Nascimento" Nullable="false" />
+          <Property Type="Int32" Name="Login_Id" Nullable="false" />
+          <Property Type="Int32" Name="Endereco_Id" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjetoStefaniniModelStoreContainer" CdmEntityContainer="ProjetoStefaniniEntities1">
+          <EntitySetMapping Name="Endereco">
+            <EntityTypeMapping TypeName="ProjetoStefaniniModel.Endereco">
+              <MappingFragment StoreEntitySet="Endereco">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="ProjetoStefaniniModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login1" ColumnName="Login" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ProjetoStefaniniModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteEndereco" FunctionName="ProjetoStefaniniModel.Store.DeleteEndereco" />
+          <FunctionImportMapping FunctionImportName="DeleteLogin" FunctionName="ProjetoStefaniniModel.Store.DeleteLogin" />
+          <FunctionImportMapping FunctionImportName="DeleteUsuario" FunctionName="ProjetoStefaniniModel.Store.DeleteUsuario" />
+          <FunctionImportMapping FunctionImportName="InsertEndereco" FunctionName="ProjetoStefaniniModel.Store.InsertEndereco" />
+          <FunctionImportMapping FunctionImportName="InsertLogin" FunctionName="ProjetoStefaniniModel.Store.InsertLogin" />
+          <FunctionImportMapping FunctionImportName="InsertUsuario" FunctionName="ProjetoStefaniniModel.Store.InsertUsuario" />
+          <FunctionImportMapping FunctionImportName="SelectEnderecoFromCep" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecoFromCep">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecoFromCep_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectEnderecoFromCidade" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecoFromCidade">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecoFromCidade_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectEnderecoFromId" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecoFromId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecoFromId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectEnderecos" FunctionName="ProjetoStefaniniModel.Store.SelectEnderecos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectEnderecos_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectLogin" FunctionName="ProjetoStefaniniModel.Store.SelectLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectLogin_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectLoginFromId" FunctionName="ProjetoStefaniniModel.Store.SelectLoginFromId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectLoginFromId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectLoginFromLogin" FunctionName="ProjetoStefaniniModel.Store.SelectLoginFromLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectLoginFromLogin_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectLoginfromLoginAndSenha" FunctionName="ProjetoStefaniniModel.Store.SelectLoginfromLoginAndSenha" />
+          <FunctionImportMapping FunctionImportName="SelectUsuarioFromCep" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarioFromCep">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarioFromCep_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectUsuarioFromLogin" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarioFromLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarioFromLogin_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectUsuarioFromNome" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarioFromNome">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarioFromNome_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectUsuarios" FunctionName="ProjetoStefaniniModel.Store.SelectUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetoStefaniniModel.SelectUsuarios_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEndereco" FunctionName="ProjetoStefaniniModel.Store.UpdateEndereco" />
+          <FunctionImportMapping FunctionImportName="UpdateLogin" FunctionName="ProjetoStefaniniModel.Store.UpdateLogin" />
+          <FunctionImportMapping FunctionImportName="UpdateUsuario" FunctionName="ProjetoStefaniniModel.Store.UpdateUsuario" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
